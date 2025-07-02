@@ -18,15 +18,29 @@ from app.api.routes import chat, documents, health
 from app.core.config import settings
 from app.services.rag_service import RAGService
 import logging
+from contextlib import asynccontextmanager
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup code
+    try:
+        logger.info("Initializing RAG service ...")
+        rag_service.initialize(force_reload=False, include_web=True)
+        logger.info("RAG service initialized successfully")
+    except Exception as e:
+        logger.error(f"Error initializing RAG service: {str(e)}")
+    yield
+    # (Optional) Shutdown code here
+
 app = FastAPI(
     title="RAG Chatbot API",
     description="API for Retrieval-Augmented Generation chatbot using Google's Gemini model with insurance documents and Angel One support content",
     version="1.0.0",
+    lifespan=lifespan,
 )
 
 # CORS configuration
@@ -45,19 +59,6 @@ rag_service = RAGService()
 app.include_router(health.router, tags=["health"], prefix="/api/health")
 app.include_router(chat.router, tags=["chat"], prefix="/api/chat")
 app.include_router(documents.router, tags=["documents"], prefix="/api/documents")
-
-@app.on_event("startup")
-async def startup_event():
-    """Initialize services on startup"""
-    try:
-        logger.info("Initializing RAG service with force reload of documents and web content...")
-        # Force reindex to ensure vector store is seeded with document embeddings
-        rag_service.initialize(force_reload=True, include_web=True)
-        logger.info("RAG service initialized successfully")
-    except Exception as e:
-        logger.error(f"Error initializing RAG service: {str(e)}")
-        # Don't exit, as we want the API to still be available
-        # The RAG service will attempt to initialize when needed
 
 if __name__ == "__main__":
     # Disable auto-reloading to avoid watchfiles errors

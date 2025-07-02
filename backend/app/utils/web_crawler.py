@@ -20,7 +20,6 @@ class WebCrawler:
     
     def __init__(self, 
                  base_url: str = "https://www.angelone.in/support",
-                 max_pages: int = 100,
                  rate_limit: float = 1.0,
                  output_dir: str = None):
         """
@@ -28,12 +27,10 @@ class WebCrawler:
         
         Args:
             base_url (str): Base URL to start crawling from
-            max_pages (int): Maximum number of pages to crawl
             rate_limit (float): Time to wait between requests in seconds
             output_dir (str): Directory to save crawled data
         """
         self.base_url = base_url
-        self.max_pages = max_pages
         self.rate_limit = rate_limit
         self.output_dir = output_dir or os.path.join(settings.PROCESSED_PATH, "web_content")
         self.visited_urls: Set[str] = set()
@@ -226,7 +223,7 @@ class WebCrawler:
         """
         page_count = 0
         
-        while self.queue and page_count < self.max_pages:
+        while self.queue:
             # Get next URL from queue
             url = self.queue.pop(0)
             
@@ -238,7 +235,7 @@ class WebCrawler:
             self.visited_urls.add(url)
             
             try:
-                logger.info(f"Crawling page {page_count + 1}/{self.max_pages}: {url}")
+                logger.info(f"Crawling page {page_count + 1}: {url}")
                 
                 # Fetch page
                 response = requests.get(url, headers=self.headers, timeout=10)

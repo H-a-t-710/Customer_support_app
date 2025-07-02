@@ -29,8 +29,6 @@ def main():
     parser = argparse.ArgumentParser(description="Process Angel One website content for the RAG system")
     parser.add_argument("--force-crawl", action="store_true", 
                         help="Force crawling even if data exists")
-    parser.add_argument("--max-pages", type=int, default=settings.WEB_CRAWL_MAX_PAGES, 
-                        help="Maximum number of pages to crawl")
     parser.add_argument("--rate-limit", type=float, default=settings.WEB_CRAWL_RATE_LIMIT, 
                         help="Time to wait between requests in seconds")
     parser.add_argument("--collection-name", default=settings.WEB_CRAWL_COLLECTION, 
@@ -51,7 +49,6 @@ def main():
     # Initialize web crawler
     crawler = WebCrawler(
         base_url=settings.WEB_CRAWL_BASE_URL,
-        max_pages=args.max_pages,
         rate_limit=args.rate_limit
     )
     

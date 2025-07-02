@@ -98,4 +98,7 @@ class EmbeddingService:
             return embedding
         except Exception as e:
             logger.error(f"Error embedding query: {str(e)}")
-            raise 
+            raise
+
+# Singleton instance for global use
+embedding_service_singleton = EmbeddingService() 

@@ -1,7 +1,7 @@
 import os
 import logging
 from typing import List, Dict, Any, Optional, Tuple, Union
-from app.services.embedding_service import EmbeddingService
+from app.services.embedding_service import EmbeddingService, embedding_service_singleton
 import chromadb
 from chromadb.utils import embedding_functions
 from app.core.config import settings
@@ -32,7 +32,7 @@ class VectorStoreService:
         os.makedirs(self.vector_store_path, exist_ok=True)
         
         # Initialize embedding service if not provided
-        self.embedding_service = embedding_service or EmbeddingService()
+        self.embedding_service = embedding_service or embedding_service_singleton
         
         # Initialize ChromaDB client with telemetry disabled
         self.client = chromadb.PersistentClient(

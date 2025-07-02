@@ -1,7 +1,7 @@
 import logging
 from typing import List, Dict, Any, Optional
 from app.services.vector_store_service import vector_store_service_singleton
-from app.services.embedding_service import EmbeddingService
+from app.services.embedding_service import embedding_service_singleton
 from app.services.llm_service import LLMService
 from app.services.retrieval_service import RetrievalService
 from app.utils.document_loader import DocumentLoader
@@ -27,12 +27,11 @@ class RAGService:
         self.vector_store = vector_store_service_singleton
         self.retrieval_service = RetrievalService(vector_store=self.vector_store)
         self.llm = LLMService()
-        self.embedding_service = EmbeddingService()
+        self.embedding_service = embedding_service_singleton
         self.document_loader = DocumentLoader(settings.DOCUMENTS_PATH)
         self.text_splitter = TextSplitter()
         self.web_crawler = WebCrawler(
             base_url=settings.WEB_CRAWL_BASE_URL,
-            max_pages=settings.WEB_CRAWL_MAX_PAGES,
             rate_limit=settings.WEB_CRAWL_RATE_LIMIT
         )
     

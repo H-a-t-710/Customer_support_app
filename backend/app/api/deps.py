@@ -3,7 +3,7 @@ from app.services.rag_service import RAGService
 from app.services.vector_store_service import VectorStoreService, vector_store_service_singleton
 from app.services.llm_service import LLMService
 from app.services.retrieval_service import RetrievalService
-from app.services.embedding_service import EmbeddingService
+from app.services.embedding_service import EmbeddingService, embedding_service_singleton
 
 def get_rag_service() -> Generator[RAGService, None, None]:
     """
@@ -63,9 +63,7 @@ def get_embedding_service() -> Generator[EmbeddingService, None, None]:
     Yields:
         Generator[EmbeddingService, None, None]: Embedding service
     """
-    service = EmbeddingService()
-    try:
-        yield service
-    finally:
-        # Cleanup code if needed
-        pass 
+    yield embedding_service_singleton
+
+    # Cleanup code if needed
+    pass 

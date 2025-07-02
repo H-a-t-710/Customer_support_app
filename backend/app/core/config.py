@@ -39,7 +39,6 @@ class Settings(BaseSettings):
     
     # Web crawling configuration
     WEB_CRAWL_BASE_URL: str = os.environ.get("WEB_CRAWL_BASE_URL", "https://www.angelone.in/support")
-    WEB_CRAWL_MAX_PAGES: int = int(os.environ.get("WEB_CRAWL_MAX_PAGES", "100"))
     WEB_CRAWL_RATE_LIMIT: float = float(os.environ.get("WEB_CRAWL_RATE_LIMIT", "1.0"))
     WEB_CRAWL_COLLECTION: str = os.environ.get("WEB_CRAWL_COLLECTION", "web_documents")
     
