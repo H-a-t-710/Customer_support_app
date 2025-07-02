@@ -208,26 +208,24 @@ export default function ChatContainer() {
 
   return (
     <div className="flex flex-col h-full bg-white rounded-none shadow-none">
-      {!isConnected && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-none flex items-center justify-center text-sm font-medium mb-0 shadow-sm">
-          <AlertCircle size={20} className="mr-2" />
-          <span>Cannot connect to the backend server. Please ensure it is running.</span>
-        </div>
-      )}
-      
-      <MessageList messages={messages} isLoading={isLoading} />
-      
+      {/* Chat Header (static) */}
+      <div className="p-2 bg-angel-gray-50 border-b border-angel-gray-200 flex items-center">
+        <h3 className="ml-2 text-xl font-semibold text-angel-gray-800">Insurance & Angel One Support Assistant</h3>
+      </div>
+      {/* Message List (scrollable) */}
+      <div className="flex-1 overflow-y-auto ">
+        <MessageList messages={messages} isLoading={isLoading} />
+      </div>
+      {/* Chat Input (static) */}
       <div className="p-4 border-t border-angel-gray-200 bg-angel-gray-50 flex-shrink-0">
         <MessageInput onSendMessage={handleSendMessage} isLoading={isLoading} />
-        
         {error && (
           <div className="mt-2 text-red-500 text-sm text-center">
             Error: {error}. Please try again.
           </div>
         )}
-        
         {messages.length > 0 && (
-          <div className="mt-4 text-center">
+          <div className="text-center">
             <button 
               onClick={() => {
                 setMessages([]);

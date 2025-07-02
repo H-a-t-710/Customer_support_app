@@ -20,13 +20,13 @@ export const MessageList: React.FC<MessageListProps> = ({ messages, isLoading })
   }, [messages, isLoading]);
 
   return (
-    <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-angel-gray-50 custom-scrollbar">
+    <div className="flex-1 p-6 pb-1 space-y-6 bg-angel-white-50 custom-scrollbar">
       {messages.length === 0 && !isLoading && (
         <div className="flex flex-col items-center justify-center h-full text-center text-angel-gray-500 p-8">
           <FileText size={56} className="mb-6 text-violet-500" />
           <h3 className="text-2xl font-semibold mb-3 text-angel-gray-700">Start a Conversation</h3>
           <p className="text-md text-angel-gray-600 max-w-sm">
-            Ask questions about insurance plans, coverage details, or Angel One&apos;s investment services.
+            Ask questions about insurance plans, coverage details, or Angel One & apos;s investment services.
           </p>
         </div>
       )}
@@ -165,19 +165,19 @@ const SourceItem: React.FC<{ source: Source, index: number }> = ({ source, index
     isWebSource = true;
     displaySource = urlObj.hostname; // Display hostname for web sources
     sourceUrl = source.metadata.source; // Store full URL for the link
-  } catch {
+      } catch {
     // Not a valid URL, treat as document or other
-    // Remove file extensions
+      // Remove file extensions
     const withoutExtension = source.metadata.source.replace(/\.(pdf|docx|doc|txt)$/i, '');
-    // Replace underscores with spaces
-    const withSpaces = withoutExtension.replace(/_/g, ' ');
-    // Capitalize words
+      // Replace underscores with spaces
+      const withSpaces = withoutExtension.replace(/_/g, ' ');
+      // Capitalize words
     displaySource = withSpaces
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
     isWebSource = false;
-  }
+    }
 
   // Calculate similarity percentage for display
   const similarityPercent = source.similarity 
@@ -201,7 +201,7 @@ const SourceItem: React.FC<{ source: Source, index: number }> = ({ source, index
               <span>
                 {displaySource}
                 {pageInfo && <span className="ml-2 text-angel-gray-500">({pageInfo})</span>}
-              </span>
+                </span>
             </div>
             <div className="flex items-center">
               {similarityPercent !== null && (
@@ -216,17 +216,17 @@ const SourceItem: React.FC<{ source: Source, index: number }> = ({ source, index
           {showContent && (
             <div className="p-3 text-angel-gray-700 prose prose-sm max-w-none leading-snug">
               <p className="line-clamp-3 text-sm">
-                {source.content}
+              {source.content}
               </p>
               {sourceUrl && (
-                <a 
+                  <a 
                   href={sourceUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
                   className="text-violet-500 hover:text-violet-700 text-xs mt-2 inline-block"
-                >
+                  >
                   Read more
-                </a>
+                  </a>
               )}
             </div>
           )}
