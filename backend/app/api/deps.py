@@ -1,6 +1,6 @@
 from typing import Generator
 from app.services.rag_service import RAGService
-from app.services.vector_store_service import VectorStoreService
+from app.services.vector_store_service import VectorStoreService, vector_store_service_singleton
 from app.services.llm_service import LLMService
 from app.services.retrieval_service import RetrievalService
 from app.services.embedding_service import EmbeddingService
@@ -26,12 +26,7 @@ def get_vector_store_service() -> Generator[VectorStoreService, None, None]:
     Yields:
         Generator[VectorStoreService, None, None]: Vector store service
     """
-    service = VectorStoreService()
-    try:
-        yield service
-    finally:
-        # Cleanup code if needed
-        pass
+    yield vector_store_service_singleton
 
 def get_llm_service() -> Generator[LLMService, None, None]:
     """

@@ -1,4 +1,5 @@
 import os
+os.environ["POSTHOG_DISABLED"] = "True"
 os.environ["ANONYMIZED_TELEMETRY"] = "False"
 
 # Disable Chromadb telemetry capture to prevent errors from signature mismatch

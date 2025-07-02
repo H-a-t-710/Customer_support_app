@@ -1,6 +1,6 @@
 import logging
 from typing import List, Dict, Any, Optional
-from app.services.vector_store_service import VectorStoreService
+from app.services.vector_store_service import VectorStoreService, vector_store_service_singleton
 from app.core.config import settings
 
 # Set up logging
@@ -19,7 +19,7 @@ class RetrievalService:
         Args:
             vector_store (VectorStoreService, optional): Vector store service
         """
-        self.vector_store = vector_store or VectorStoreService()
+        self.vector_store = vector_store or vector_store_service_singleton
     
     def retrieve(self, query: str, top_k: int = 5, threshold: float = 0.6, collection_name: str = "documents") -> List[Dict[str, Any]]:
         """

@@ -52,6 +52,9 @@ class Settings(BaseSettings):
     LOG_FORMAT: str = os.environ.get("LOG_FORMAT", "console")  # console or json
     LOG_FILE: str = os.environ.get("LOG_FILE", "")
     
+    # ChromaDB configuration
+    CHROMA_ANONYMIZED_TELEMETRY: bool = os.environ.get("CHROMA_ANONYMIZED_TELEMETRY", "false").lower() == "true"
+
     class Config:
         case_sensitive = True
 

@@ -135,4 +135,18 @@ compiled/
 
 # OS files
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Python ignores
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+
+# Data and logs
+data/
+*.log 
+
+tests/

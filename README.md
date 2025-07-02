@@ -37,7 +37,7 @@ A powerful chatbot system that combines Retrieval-Augmented Generation (RAG) wit
 
 1. Navigate to the backend directory:
    ```bash
-   cd rag-chatbot-system/backend
+   cd /backend
    ```
 
 2. Create a virtual environment:
@@ -48,7 +48,8 @@ A powerful chatbot system that combines Retrieval-Augmented Generation (RAG) wit
 
 3. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install uv
+   uv pip install -r requirements.txt
    ```
 
 4. Create a `.env` file in the backend directory with the following content:
@@ -77,7 +78,7 @@ A powerful chatbot system that combines Retrieval-Augmented Generation (RAG) wit
 
 1. Navigate to the frontend directory:
    ```bash
-   cd rag-chatbot-system/frontend
+   cd /frontend
    ```
 
 2. Install dependencies:
@@ -98,7 +99,7 @@ A powerful chatbot system that combines Retrieval-Augmented Generation (RAG) wit
 ### Start the Backend
 
 ```bash
-cd rag-chatbot-system/backend
+cd /backend
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 python main.py
 ```
@@ -108,7 +109,7 @@ The API will be available at http://localhost:8000 with interactive docs at http
 ### Start the Frontend
 
 ```bash
-cd rag-chatbot-system/frontend
+cd /frontend
 npm run dev
 # or
 yarn dev
@@ -122,6 +123,11 @@ The frontend will be available at http://localhost:3000
 - Ask questions about Angel One's investment services, based on their support website
 - View sources for each response and click to expand the exact content used
 - Toggle the web content option to include/exclude Angel One support content
+
+## 📖 API Documentation
+
+- The backend provides interactive API documentation at [http://localhost:8000/docs](http://localhost:8000/docs) (Swagger UI) and [http://localhost:8000/redoc](http://localhost:8000/redoc) (ReDoc).
+- All endpoints and request/response schemas are documented there automatically by FastAPI.
 
 ## 📊 System Architecture
 
@@ -151,6 +157,11 @@ The frontend will be available at http://localhost:3000
 └──────────────────┘                                     └─────────────────────┘
 ```
 
+## 🚢 Deployment
+
+### Environment Variables
+- See `backend/.env.example` and `frontend/.env.example` for required environment variables.
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -160,4 +171,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Google Gemini API for text generation
 - HuggingFace for the embedding models
 - LangChain for the RAG framework
-- Angel One for their financial support content 
+- Angel One for their financial support content

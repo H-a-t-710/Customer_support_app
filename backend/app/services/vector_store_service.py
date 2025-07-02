@@ -26,6 +26,7 @@ class VectorStoreService:
             embedding_service (EmbeddingService, optional): Embedding service
         """
         self.vector_store_path = vector_store_path or settings.VECTOR_DB_PATH
+        logger.info(f"ChromaDB vector store path: {os.path.abspath(self.vector_store_path)}")
         
         # Ensure vector store directory exists
         os.makedirs(self.vector_store_path, exist_ok=True)
@@ -275,4 +276,7 @@ class VectorStoreService:
             }
         except Exception as e:
             logger.error(f"Error getting collection info for '{collection_name}': {str(e)}")
-            return {"name": collection_name, "count": 0, "error": str(e)} 
+            return {"name": collection_name, "count": 0, "error": str(e)}
+
+# Singleton instance for app-wide use
+vector_store_service_singleton = VectorStoreService() 

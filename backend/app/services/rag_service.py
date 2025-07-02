@@ -1,6 +1,6 @@
 import logging
 from typing import List, Dict, Any, Optional
-from app.services.vector_store_service import VectorStoreService
+from app.services.vector_store_service import vector_store_service_singleton
 from app.services.embedding_service import EmbeddingService
 from app.services.llm_service import LLMService
 from app.services.retrieval_service import RetrievalService
@@ -24,7 +24,7 @@ class RAGService:
         """
         Initialize the RAG service with its component services.
         """
-        self.vector_store = VectorStoreService()
+        self.vector_store = vector_store_service_singleton
         self.retrieval_service = RetrievalService(vector_store=self.vector_store)
         self.llm = LLMService()
         self.embedding_service = EmbeddingService()
@@ -191,16 +191,19 @@ class RAGService:
             bool: True if initialization was successful
         """
         try:
-            # Check if we need to initialize the vector store
-            vector_db_path = os.path.join(settings.VECTOR_DB_PATH, "chroma.sqlite3")
+            # Check if we need to initialize the vector store or if a force reload is requested
+            vector_db_file_path = os.path.join(self.vector_store.vector_store_path, "chroma.sqlite3")
             
-            if force_reload or not os.path.exists(vector_db_path):
+            # Only force reload if the database file does not exist, or if force_reload is explicitly True
+            if force_reload or not os.path.exists(vector_db_file_path):
                 logger.info("Initializing vector store with documents")
                 self.process_documents()
+                logger.info(f"'documents' collection count: {self.vector_store.get_collection_info('documents').get('count')}")
                 
                 if include_web:
                     logger.info("Initializing vector store with web content")
                     self.process_web_content(force_crawl=force_reload)
+                    logger.info(f"'{settings.WEB_CRAWL_COLLECTION}' collection count: {self.vector_store.get_collection_info(settings.WEB_CRAWL_COLLECTION).get('count')}")
             else:
                 # Just ensure collections exist
                 self.vector_store.get_or_create_collection("documents")
