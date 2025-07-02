@@ -12,7 +12,7 @@ const Header = ({ className }: HeaderProps) => {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div>
           <Link href="/" className="flex items-center">
-            <span className="text-2xl font-bold">Insurance RAG Chatbot</span>
+            <span className="text-2xl font-bold">Customer Support Chatbot</span>
           </Link>
           <p className="text-sm text-blue-100">Ask questions about insurance plans</p>
         </div>

@@ -25,25 +25,25 @@ export const MessageInput: React.FC<MessageInputProps> = ({
   };
 
   return (
-    <div className="border-t border-gray-200 p-4 bg-white">
-      <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
-        <div className="flex items-center">
+     <div className=" bg-angel-gray-50 border-t border-angel-gray-200">
+      <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
+        <div className="flex items-center space-x-3">
           <button
             type="button"
-            className={`p-2 rounded-md mr-2 flex items-center ${
-              includeWeb 
-                ? 'bg-green-100 text-green-700' 
-                : 'bg-gray-100 text-gray-500'
+            className={`flex-shrink-0 p-2.5 rounded-full shadow-md transition-colors duration-200
+              ${includeWeb 
+                ? 'bg-angel-green-500 text-white hover:bg-angel-green-600' 
+                : 'bg-angel-gray-200 text-angel-gray-600 hover:bg-angel-gray-300'
             }`}
             onClick={() => setIncludeWeb(!includeWeb)}
             title={includeWeb ? 'Web content included' : 'Web content excluded'}
           >
-            <Globe size={18} />
+            <Globe size={20} />
           </button>
           
-          <div className="flex-1 relative">
+          <div className="flex-grow relative">
             <textarea
-              className="w-full p-3 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full p-3 pr-12 border border-angel-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none custom-scrollbar-thin"
               placeholder="Ask a question about your insurance or Angel One services..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -54,16 +54,18 @@ export const MessageInput: React.FC<MessageInputProps> = ({
                 }
               }}
               rows={1}
+              style={{ maxHeight: '150px' }}
               disabled={isLoading}
             />
             <button
               type="submit"
               disabled={!message.trim() || isLoading}
-              className={`absolute right-2 top-2.5 p-1.5 rounded-md ${
-                !message.trim() || isLoading
-                  ? 'text-gray-400'
-                  : 'text-blue-600 hover:text-blue-800'
-              }`}
+              className={`absolute right-3 bottom-3 p-2 rounded-full transition-colors duration-200
+                ${!message.trim() || isLoading
+                  ? 'bg-violet-200 text-violet-400 cursor-not-allowed'
+                  : 'bg-violet-600 text-white hover:bg-violet-700'
+                }
+              `}
             >
               {isLoading ? (
                 <Loader2 size={20} className="animate-spin" />
@@ -75,7 +77,8 @@ export const MessageInput: React.FC<MessageInputProps> = ({
         </div>
         
         {includeWeb && (
-          <div className="text-xs text-gray-500 ml-12">
+          <div className="text-xs text-angel-gray-500 flex items-center justify-center">
+            <Globe size={14} className="mr-1 text-angel-green-600" />
             Including Angel One web content in search results
           </div>
         )}

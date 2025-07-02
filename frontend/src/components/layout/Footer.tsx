@@ -12,7 +12,7 @@ const Footer = ({ className }: FooterProps) => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <p className="text-gray-600 text-sm">
-              Insurance RAG Chatbot - Powered by Gemini
+              Customer Support Chatbot - Powered by Hemant
             </p>
           </div>
           
@@ -39,7 +39,7 @@ const Footer = ({ className }: FooterProps) => {
         </div>
         
         <div className="mt-4 text-center text-xs text-gray-500">
-          &copy; {new Date().getFullYear()} Insurance RAG Chatbot. All rights reserved.
+          &copy; {new Date().getFullYear()} Customer Support Chatbot. All rights reserved.
         </div>
       </div>
     </footer>

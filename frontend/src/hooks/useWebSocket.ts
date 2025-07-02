@@ -15,6 +15,11 @@ export function useWebSocket(url: string): UseWebSocketReturn {
   
   // Set up WebSocket connection
   useEffect(() => {
+    if (!url) {
+      setConnectionStatus('Disconnected');
+      return;
+    }
+
     // Create WebSocket connection
     const socket = new WebSocket(url);
     socketRef.current = socket;

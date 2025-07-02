@@ -18,10 +18,10 @@ export default function ChatContainer() {
   
   // Initialize WebSocket for real-time chat
   const { 
-    lastMessage, 
+    lastMessage,
     sendMessage: sendWebSocketMessage,
     connectionStatus 
-  } = useWebSocket(`${process.env.NEXT_PUBLIC_API_WS_URL || 'ws://localhost:8000'}/api/chat/ws/${sessionId}`);
+  } = useWebSocket(isClient ? `${process.env.NEXT_PUBLIC_API_WS_URL || 'ws://localhost:8000'}/api/chat/ws/${sessionId}` : '');
   
   // Process incoming WebSocket messages
   useEffect(() => {
@@ -207,9 +207,9 @@ export default function ChatContainer() {
   }
 
   return (
-    <div className="chat-container flex flex-col h-full">
+    <div className="flex flex-col h-full bg-white rounded-none shadow-none">
       {!isConnected && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded flex items-center mb-4">
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-none flex items-center justify-center text-sm font-medium mb-0 shadow-sm">
           <AlertCircle size={20} className="mr-2" />
           <span>Cannot connect to the backend server. Please ensure it is running.</span>
         </div>
@@ -217,23 +217,23 @@ export default function ChatContainer() {
       
       <MessageList messages={messages} isLoading={isLoading} />
       
-      <div className="message-input-container p-4 border-t">
+      <div className="p-4 border-t border-angel-gray-200 bg-angel-gray-50 flex-shrink-0">
         <MessageInput onSendMessage={handleSendMessage} isLoading={isLoading} />
         
         {error && (
-          <div className="mt-2 text-red-500 text-sm">
+          <div className="mt-2 text-red-500 text-sm text-center">
             Error: {error}. Please try again.
           </div>
         )}
         
         {messages.length > 0 && (
-          <div className="mt-2 text-right">
+          <div className="mt-4 text-center">
             <button 
               onClick={() => {
                 setMessages([]);
                 setError(null);
               }}
-              className="text-sm text-gray-500 hover:text-blue-600"
+              className="text-sm text-violet-600 hover:text-violet-800 font-medium px-3 py-1 rounded-md bg-violet-50 hover:bg-violet-100 transition-colors duration-200"
             >
               Reset conversation
             </button>
