@@ -57,7 +57,7 @@ class LLMService:
                 "temperature": 0.3,  # Lower temperature for more factual responses
                 "top_p": 0.95,
                 "top_k": 40,
-                "max_output_tokens": 1024,
+                "max_output_tokens": 2500,
             }
             
             # Generate response with improved parameters
@@ -133,13 +133,11 @@ IMPORTANT INSTRUCTIONS:
 3. DO NOT make up or infer information that is not explicitly stated in the context.
 4. If multiple documents contain relevant information, cite all of them.
 5. Be concise but thorough in your answers and do not include documets or content you refering to.
-6. Format your response in a clear, readable way.
+6. Format your response in a clear, readable way. Do NOT use bullet points, asterisks (*), or dashes (-) in your answer. Present the information in plain sentences or a numbered list if needed.
 7. For financial or insurance-specific terms, provide brief explanations if available in the context.
 8. If answering questions about Angel One services, cite the specific web document sources.
-10. If answering insurance questions, specify which insurance document you're using (e.g., "According to the America's Choice 2500 Gold plan...").
-11. Use simle and plane text with proper foramt to answer. 
-12. Do not use any secial character util and unless it is there in the context.
-13. If user do not have exact question but close to context then help with relavant context information.
+9. If answering insurance questions, specify which insurance document you're using.
+10. If user do not have exact question but close to context then help with relavant context information.
 
 CONTEXT:
 {context}
