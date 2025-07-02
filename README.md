@@ -61,7 +61,6 @@ A powerful chatbot system that combines Retrieval-Augmented Generation (RAG) wit
    DOCUMENTS_PATH=../documents
    PROCESSED_PATH=./data/processed
    WEB_CRAWL_BASE_URL=https://www.angelone.in/support
-   WEB_CRAWL_MAX_PAGES=100
    ```
 
 5. Run the web crawler to collect Angel One support content:
