@@ -125,10 +125,10 @@ compiled/
 *.sqlite3
 
 # ChromaDB vector store
-/data/vector_store/
+#/data/vector_store/
 
 # Processed data
-/data/processed/
+#/data/processed/
 
 # VSCode
 .vscode/
@@ -146,7 +146,7 @@ env/
 venv/
 
 # Data and logs
-data/
+#data/
 *.log 
 
 tests/
