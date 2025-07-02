@@ -29,7 +29,7 @@ async def lifespan(app: FastAPI):
     # Startup code
     try:
         logger.info("Initializing RAG service ...")
-        rag_service.initialize(force_reload=False, include_web=True)
+        rag_service.initialize(force_reload=True, include_web=True)
         logger.info("RAG service initialized successfully")
     except Exception as e:
         logger.error(f"Error initializing RAG service: {str(e)}")
